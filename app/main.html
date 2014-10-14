@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<title></title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+
+		<!-- @if TARGET=='web.dev' -->
+			<!-- CSS -->
+			<link href="/assets/css/vendor.css" type="text/css" rel="stylesheet" />
+			<link href="/assets/css/app.css" type="text/css" rel="stylesheet" />
+			<!-- JS -->
+			<script src="http://maps.googleapis.com/maps/api/js"></script>
+			<script src="/assets/js/app.js" defer></script>
+		<!-- @endif -->
+
+		<!-- @if TARGET=='web.prod' -->
+			<!-- CSS -->
+			<link href="/assets/css/vendor.min.css" type="text/css" rel="stylesheet" />
+			<link href="/assets/css/app.min.css" type="text/css" rel="stylesheet" />
+			<!-- JS -->
+			<script src="http://maps.googleapis.com/maps/api/js"></script>
+			<script src="/assets/js/app.min.js" defer></script>
+		<!-- @endif -->
+
+	</head>
+
+	<body>
+	</body>
+
+</html>
+

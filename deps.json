@@ -1,0 +1,9 @@
+{
+	"css": [
+		"bower_components/bootstrap/dist/css/bootstrap.css",
+		"bower_components/fontawesome/css/font-awesome.css"
+	],
+	"fonts": [
+		"bower_components/fontawesome/fonts/*"
+	]
+}
