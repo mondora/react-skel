@@ -18,6 +18,7 @@ var getTopLevel = function () {
 	return (
 		<Routes location="history">
 			<Route path="/" handler={Root} flux={flux}>
+				<Route name="home" path="/" handler={Home} />
 				<Route name="user" path="user/" handler={User} />
 				<DefaultRoute handler={Home} />
 			</Route>

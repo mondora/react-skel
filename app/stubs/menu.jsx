@@ -2,16 +2,29 @@
 
 var items = [
 	{
-		text: "Link 0",
-		href: "http://localhost:8080/link0"
+		text: "Menu",
+		icon: "fa-home",
+		href: "user",
+		submenu: [
+			{
+				text: "subelement0",
+				href: "user"
+			},
+			{
+				text: "subelement1",
+				href: "user"
+			}
+		]
 	},
 	{
-		text: "Link 1",
-		href: "http://localhost:8080/link1"
+		text: "Home",
+		icon: "fa-home",
+		href: "home"
 	},
 	{
-		text: "Link 2",
-		href: "http://localhost:8080/link2"
+		text: "User",
+		icon: "fa-user",
+		href: "user"
 	}
 ];
 

@@ -19,14 +19,36 @@ var Root = React.createClass({
 			menuItems: flux.store("MenuItemStore").getMenuItems().menuItems
 		};
 	},
+	toggleSidebar: function () {
+		// Creiamo l'oggetto js con proprietà
+		// sidebarIsOpen negazione di sé stessa.
+		// Lo passiamo poi al metodo setState
+		// che aggiorna lo stato del componente
+		// e scatena il rerendering dello stesso
+		var newState = {
+			sidebarIsOpen: !this.state.sidebarIsOpen
+		};
+		this.setState(newState);
+		/** versione condensata
+		this.setState({
+			sidebarIsOpen: !this.state.sidebarIsOpen
+		});
+		*/
+	},
 	render: function() {
+		var sidebarClass = this.state.sidebarIsOpen ? "open" : "";
 		return (
 			<div>
-				<div id="sidebar">
+				<div id="sidebar" className={sidebarClass}>
 					<Sidebar items={this.state.menuItems} />
 				</div>
+				<div id="panino" className={sidebarClass}>
+					<button className="btn btn-default" onClick={this.toggleSidebar}>
+						<i className="fa fa-bars"></i>
+					</button>
+				</div>
 				<div id="content">
-					<this.props.activeRouteHandler/>
+					<this.props.activeRouteHandler />
 				</div>
 			</div>
 		);
