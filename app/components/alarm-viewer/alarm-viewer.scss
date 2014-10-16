@@ -31,8 +31,10 @@
 			}
 			.value-circle {
 				display: inline-block;
+				user-select: none;
 				text-align: center;
 				color: $app-white;
+				cursor: pointer;
 				border: {
 					radius: 50%;
 					color: $app-white;

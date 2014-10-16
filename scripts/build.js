@@ -72,6 +72,14 @@ var buildAppFavicon = function (target) {
 	});
 };
 
+var buildAppImages = function (target) {
+	return new BPromise(function (resolve, reject) {
+		gulp.src("app/images/**/*.png")
+			.pipe(gp.plumber(reject))
+			.pipe(gulp.dest("builds/" + target + "/assets/images/"))
+			.on("end", resolve);
+	});
+};
 
 
 /////////////////////////////////////
@@ -131,6 +139,7 @@ module.exports = {
 	appScripts:    buildAppScripts,
 	appStyles:     buildAppStyles,
 	appFavicon:    buildAppFavicon,
+	appImages:     buildAppImages,
 	vendorScripts: buildVendorScripts,
 	vendorStyles:  buildVendorStyles,
 	vendorFonts:   buildVendorFonts

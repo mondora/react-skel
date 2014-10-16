@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
 var React = require("react");
-var Link = require("react-router").Link;
 var Grid = require("react-bootstrap").Grid;
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
@@ -25,7 +24,11 @@ var Home = React.createClass({
 						<br />
 						<br />
 						<Col xs={12}>
-							<AlarmViewer alarmsTable={this.props.alarmsTable} />
+							<AlarmViewer
+								alarmsTable={this.props.alarmsTable}
+								alarms={this.props.alarms}
+								flux={this.props.flux}
+							/>
 						</Col>
 					</Row>
 				</Grid>

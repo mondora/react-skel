@@ -55,11 +55,72 @@ var alarms = {
     }
 };
 
+var dettagli = [];
+
+dettagli[0] = [
+    {
+        "Orario": "14:00",
+        "Zona": "NO",
+        "Tipologia": "CHIAMATA VOCE",
+        "Gravita": "A1",
+        "Eventi": "1",
+        "Soglia": "1",
+        "Descrizione": "IR sopra soglia",
+        "Stato": "0"
+    },
+    {
+        "Orario": "14:00",
+        "Zona": "NO",
+        "Tipologia": "CONNESSIONE DATI INTERNET DA TERMINALE",
+        "Gravita": "A1",
+        "Eventi": "1",
+        "Soglia": "1",
+        "Descrizione": "IR sopra soglia",
+        "Stato": "0"
+    }
+];
+
+dettagli[1] = [
+    {
+        "Orario": "16:00",
+        "Zona": "SU",
+        "Tipologia": "CONNESSIONE DATI INTERNET DA TERMINALE",
+        "Gravita": "A1",
+        "Eventi": "1",
+        "Soglia": "1",
+        "Descrizione": "IR sopra soglia",
+        "Stato": "0"
+    },
+    {
+        "Orario": "16:00",
+        "Zona": "SU",
+        "Tipologia": "CONNESSIONE DATI INTERNET DA TERMINALE",
+        "Gravita": "A1",
+        "Eventi": "1",
+        "Soglia": "1",
+        "Descrizione": "IR sopra soglia",
+        "Stato": "0"
+    }
+];
+
+
 var AlarmsAPI = {
 	getAlarms: function (cb) {
 		setTimeout(function () {
 			cb(alarms);
 		}, 500);
+	},
+	getDetails: function (zone, time, cb) {
+		var response = [];
+		if (zone === "NO") {
+			response = dettagli[0];
+		} else if (zone === "SU") {
+			response = dettagli[1];
+		}
+		//console.log(response);
+		setTimeout(function () {
+			cb(response);
+		}, 100);
 	}
 };
 

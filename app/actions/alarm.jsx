@@ -9,7 +9,36 @@ var loadAlarmsTable = function () {
 		self.dispatch(constants.LOAD_ALARMS, {alarmsTable: alarmsTable});
 	});
 };
+var getAlarmsDetails = function (zone, time) {
+	var self = this;
+	var AlarmsAPI = require("../stubs/alarm-viewer.jsx");
+	// Chiamo l'API con i parametri definiti dalla "posizione"
+	// del click, che sono appunto zona e tempo
+
+	/* Chiamata HTTP da browser a server in jQuery
+	$.ajax({
+		method: "GET",
+		path: "getAlarmsByZoneAndTime",
+		params: {
+			zone: zone,
+			time: time
+		},
+		success: function (result) {
+			self.dispatch(constants.GOTTEN_ALARM_DETAILS, {alarmsList: alarmsList});
+		}
+	});
+	*/
+
+	AlarmsAPI.getDetails(zone, time, function (alarmsList) {
+		// Quando l'azione resituisce un valore, emetti
+		// l'evento GOTTEN_ALARM_DETAILS che viene poi
+		// intercettato dallo store che sta ascoltando
+		// per quell'evento
+		self.dispatch(constants.GOTTEN_ALARM_DETAILS, {alarmsList: alarmsList});
+	});
+};
 
 module.exports = {
-	loadAlarmsTable: loadAlarmsTable
+	loadAlarmsTable: loadAlarmsTable,
+	getAlarmsDetails: getAlarmsDetails
 };

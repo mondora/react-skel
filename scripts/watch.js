@@ -26,6 +26,10 @@ var watchAppFavicon = function () {
 	return gulp.watch("app/favicon.ico");
 };
 
+var watchAppImages = function () {
+	return gulp.watch("app/images/**/*.png");
+};
+
 
 
 /////////////////////////////////////
@@ -51,6 +55,7 @@ module.exports = {
 	appScripts:    watchAppScripts,
 	appStyles:     watchAppStyles,
 	appFavicon:    watchAppFavicon,
+	appImages:     watchAppImages,
 	vendorScripts: watchDeps,
 	vendorStyles:  watchDeps,
 	vendorFonts:   watchDeps

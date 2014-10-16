@@ -2,6 +2,7 @@
 
 var React   = require("react");
 var Sidebar = require("../../components/sidebar/sidebar.jsx");
+var Navbar = require("react-bootstrap").Navbar;
 
 var Fluxxor         = require("fluxxor");
 var FluxMixin       = Fluxxor.FluxMixin(React);
@@ -22,6 +23,13 @@ var Root = React.createClass({
 		var flux = this.getFlux();
 		return {
 			alarmsTable: flux.store("AlarmStore").getAlarmsTable(),
+			// "Lega" la proprietà alarms dello state del componente
+			// al risultato restituito dalla chiamata al metodo getAllAlarms
+			// dello store "AlarmStore". L'oggetto restituito contiene la lista
+			// di tutti gli allarmi in cui gli allarmi sono associati alle
+			// proprietà dell'oggetto con nome corrispondente all'id
+			// dell'allarme
+			alarms: flux.store("AlarmStore").getAllAlarms(),
 			menuItems: flux.store("MenuItemStore").getMenuItems().menuItems
 		};
 	},
@@ -51,13 +59,19 @@ var Root = React.createClass({
 				<div id="sidebar" className={sidebarClass}>
 					<Sidebar items={this.state.menuItems} />
 				</div>
-				<div id="panino" className={sidebarClass}>
-					<button className="btn btn-default" onClick={this.toggleSidebar}>
-						<i className="fa fa-bars"></i>
-					</button>
-				</div>
+				<Navbar id="header" fixedTop>
+					<div id="panino" className={sidebarClass}>
+						<i className="fa fa-bars" onClick={this.toggleSidebar}>
+						</i>
+					</div>
+					<img src="/assets/images/logo.png" />
+				</Navbar>
 				<div id="content">
-					<this.props.activeRouteHandler alarmsTable={this.state.alarmsTable} />
+					<this.props.activeRouteHandler
+						alarmsTable={this.state.alarmsTable}
+						alarms={this.state.alarms}
+						flux={this.props.flux}
+					/>
 				</div>
 			</div>
 		);
