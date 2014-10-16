@@ -10,12 +10,18 @@ var StoreWatchMixin = Fluxxor.StoreWatchMixin;
 var Root = React.createClass({
 	mixins: [
 		FluxMixin,
-		StoreWatchMixin("AlarmStore", "MenuItemStore")
+		// Dice alla view di ascoltare gli eventi "change"
+		// emessi dagli store che gli attacco nell'elenco
+		// sottostante
+		StoreWatchMixin(
+			"AlarmStore",
+			"MenuItemStore"
+		)
 	],
 	getStateFromFlux: function () {
 		var flux = this.getFlux();
 		return {
-			alarms: flux.store("AlarmStore").getAlarms().alarms,
+			alarmsTable: flux.store("AlarmStore").getAlarmsTable(),
 			menuItems: flux.store("MenuItemStore").getMenuItems().menuItems
 		};
 	},
@@ -37,6 +43,9 @@ var Root = React.createClass({
 	},
 	render: function() {
 		var sidebarClass = this.state.sidebarIsOpen ? "open" : "";
+		//console.log("RENDERING...");
+		//console.log(this.state.alarmsTable);
+		//console.log(this.state.menuItems);
 		return (
 			<div>
 				<div id="sidebar" className={sidebarClass}>
@@ -48,13 +57,14 @@ var Root = React.createClass({
 					</button>
 				</div>
 				<div id="content">
-					<this.props.activeRouteHandler />
+					<this.props.activeRouteHandler alarmsTable={this.state.alarmsTable} />
 				</div>
 			</div>
 		);
 	},
 	componentDidMount: function () {
 		this.getFlux().actions.loadMenuItems();
+		this.getFlux().actions.loadAlarmsTable();
 	}
 });
 

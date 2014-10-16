@@ -5,22 +5,20 @@ var constants = require("../constants.jsx");
 
 var AlarmStore = Fluxxor.createStore({
 	initialize: function () {
-		this.alarms = [];
+		this.alarmsTable = {};
+		// Dice allo store di ascolare l'evento LOAD_ALARMS scatenato
+		// dalle azione e di reagire a tale evento chiamando il metodo
+		// this.onLoadAlarms
 		this.bindActions(
-			constants.ADD_ALARM, this.onAddAlarm
+			constants.LOAD_ALARMS, this.onLoadAlarms
 		);
 	},
-	onAddAlarm: function (payload) {
-		this.alarms.push({
-			antennaId: payload.antennaId,
-			time: payload.time,
-			status: "todo"
-		});
+	onLoadAlarms: function (payload) {
+		this.alarmsTable = payload.alarmsTable.allarmi;
+		this.emit("change");
 	},
-	getAlarms: function () {
-		return {
-			alarms: this.alarms
-		};
+	getAlarmsTable: function () {
+		return this.alarmsTable;
 	}
 });
 

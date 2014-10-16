@@ -32,7 +32,7 @@ var Menu = {
 	getItems: function (cb) {
 		setTimeout(function () {
 			cb(items);
-		}, 1000);
+		}, 5000);
 	}
 };
 

@@ -8,7 +8,9 @@ var addMenuItem = function (menuItem) {
 
 var loadMenuItems = function () {
 	var self = this;
-	require("../stubs/menu.jsx").getItems(function (items) {
+	var MenuAPI = require("../stubs/menu.jsx");
+	MenuAPI.getItems(function (items) {
+		//console.log(items);
 		self.dispatch(constants.LOAD_MENU_ITEMS, {items: items});
 	});
 };
