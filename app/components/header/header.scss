@@ -1,0 +1,15 @@
+#header {
+	.user-icon {
+		position: absolute;
+		right: 0px;
+		top: 9px;
+		font-size: 32px;
+	}
+	.notification-badge {
+		position: absolute;
+		right: 0px;
+		top: 2px;
+		background: $app-red;
+		color: $app-white;
+	}
+}

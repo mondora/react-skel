@@ -2,6 +2,7 @@
 
 var React   = require("react");
 var Sidebar = require("../../components/sidebar/sidebar.jsx");
+var Header = require("../../components/header/header.jsx");
 var Navbar = require("react-bootstrap").Navbar;
 
 var Fluxxor         = require("fluxxor");
@@ -23,6 +24,8 @@ var Root = React.createClass({
 		var flux = this.getFlux();
 		return {
 			alarmsTable: flux.store("AlarmStore").getAlarmsTable(),
+			alarmsGraphs: flux.store("AlarmStore").getAlarmsGraphs(),
+			alarmsCount: flux.store("AlarmStore").getAlarmsCount(),
 			// "Lega" la proprietà alarms dello state del componente
 			// al risultato restituito dalla chiamata al metodo getAllAlarms
 			// dello store "AlarmStore". L'oggetto restituito contiene la lista
@@ -59,16 +62,17 @@ var Root = React.createClass({
 				<div id="sidebar" className={sidebarClass}>
 					<Sidebar items={this.state.menuItems} />
 				</div>
-				<Navbar id="header" fixedTop>
-					<div id="panino" className={sidebarClass}>
-						<i className="fa fa-bars" onClick={this.toggleSidebar}>
-						</i>
-					</div>
-					<img src="/assets/images/logo.png" />
-				</Navbar>
+				<div id="header">
+					<Header
+						sidebarIsOpen={this.state.sidebarIsOpen}
+						alarmsCount={this.state.alarmsCount}
+						toggleSidebar={this.toggleSidebar.bind(this)}
+					/>
+				</div>
 				<div id="content">
 					<this.props.activeRouteHandler
 						alarmsTable={this.state.alarmsTable}
+						alarmsGraphs={this.state.alarmsGraphs}
 						alarms={this.state.alarms}
 						flux={this.props.flux}
 					/>
@@ -79,6 +83,11 @@ var Root = React.createClass({
 	componentDidMount: function () {
 		this.getFlux().actions.loadMenuItems();
 		this.getFlux().actions.loadAlarmsTable();
+		this.getFlux().actions.getAlarmsGraphs("NO");
+		var self = this;
+		setInterval(function () {
+			self.getFlux().actions.getAlarmsCount();
+		}, 1000);
 	}
 });
 

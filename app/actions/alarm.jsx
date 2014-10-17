@@ -38,7 +38,29 @@ var getAlarmsDetails = function (zone, time) {
 	});
 };
 
+var getAlarmsGraphs = function (zone) {
+	var self = this;
+	var AlarmsAPI = require("../stubs/alarm-viewer.jsx");
+	AlarmsAPI.getAlarmsGraphs(zone, function (alarmsGraphs) {
+		// Quando l'azione resituisce un valore, emetti
+		// l'evento GOTTEN_ALARMS_GRAPHS che viene poi
+		// intercettato dallo store che sta ascoltando
+		// per quell'evento
+		self.dispatch(constants.GOTTEN_ALARMS_GRAPHS, {alarmsGraphs: alarmsGraphs});
+	});
+};
+
+var getAlarmsCount = function () {
+	var self = this;
+	var AlarmsAPI = require("../stubs/alarm-viewer.jsx");
+	AlarmsAPI.getAlarmsCount(function (alarmsCount) {
+		self.dispatch(constants.GOTTEN_ALARMS_COUNT, {alarmsCount: alarmsCount});
+	});
+};
+
 module.exports = {
 	loadAlarmsTable: loadAlarmsTable,
-	getAlarmsDetails: getAlarmsDetails
+	getAlarmsDetails: getAlarmsDetails,
+	getAlarmsGraphs: getAlarmsGraphs,
+	getAlarmsCount: getAlarmsCount
 };

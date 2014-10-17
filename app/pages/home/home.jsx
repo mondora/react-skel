@@ -15,17 +15,14 @@ var Home = React.createClass({
 		return (
 			<div id="home">
 				<Grid>
+					<br />
+					<br />
+					<br />
 					<Row>
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
 						<Col xs={12}>
 							<AlarmViewer
 								alarmsTable={this.props.alarmsTable}
+								alarmsGraphs={this.props.alarmsGraphs}
 								alarms={this.props.alarms}
 								flux={this.props.flux}
 							/>

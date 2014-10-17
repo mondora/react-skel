@@ -7,6 +7,9 @@ var _ = require("lodash");
 var Row = require("react-bootstrap").Row;
 var Col = require("react-bootstrap").Col;
 var Table = require("react-bootstrap").Table;
+var LineChart = require("../line-chart/line-chart.jsx");
+var Carousel = require("react-bootstrap").Carousel;
+var CarouselItem = require("react-bootstrap").CarouselItem;
 
 
 var AlarmCircle = React.createClass({
@@ -96,6 +99,14 @@ var AlarmRow = React.createClass({
 			);
 		}
 
+		var carouselItems = this.props.alarmsGraphs.map(function (graph) {
+			return (
+				<CarouselItem>
+					<LineChart width={800} height={300} data={graph} options={{}} />
+				</CarouselItem>
+			);
+		});
+
 		return (
 			<Row>
 				<div className="background-line"></div>
@@ -109,6 +120,11 @@ var AlarmRow = React.createClass({
 				{values}
 				<Col xs={10} xsOffset={1}>
 					{alarmTable}
+				</Col>
+				<Col xs={10} xsOffset={1}>
+					<Carousel className="graphs-carousel">
+						{carouselItems}
+					</Carousel>
 				</Col>
 			</Row>
 		);
@@ -139,6 +155,7 @@ var AlarmViewer = React.createClass({
 				<AlarmRow
 					line={line}
 					alarms={self.props.alarms}
+					alarmsGraphs={self.props.alarmsGraphs}
 					flux={self.props.flux}
 				/>
 			);
